@@ -7,11 +7,19 @@ interface Props {
   lang?: 'zh' | 'en';
 }
 
-const { title, description = 'Hermes Agent — 一个与你共同成长的自主 AI Agent', lang: propLang } = Astro.props;
+const defaultDescriptions = {
+  en: 'Hermes Agent is an open-source autonomous AI agent with persistent memory, 643+ skills, and multi-platform support. Install on Linux, macOS, or WSL2 in 2 minutes.',
+  zh: 'Hermes Agent 是一个开源自主 AI Agent，具备持久记忆、643+ 技能和多平台支持。支持 Linux、macOS、WSL2，两分钟完成安装。',
+};
+
+const { title, description, lang: propLang } = Astro.props;
 const lang = propLang || getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const altLang = lang === 'zh' ? 'en' : 'zh';
 const altPath = getLocalizedPath(Astro.url.pathname.replace(`/${lang}`, '').replace(/^\/$/, '/') || '/', altLang);
+const pageDescription = description || defaultDescriptions[lang];
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/favicon.svg', Astro.site);
 
 import '../styles/global.css';
 ---
@@ -21,13 +29,42 @@ import '../styles/global.css';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
-    <meta name="keywords" content="Hermes Agent, AI Agent, autonomous agent, Nous Research, open source AI" />
+
+    <!-- Primary Meta Tags -->
+    <title>{title} | Hermes Agent — Autonomous AI Agent</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="keywords" content="Hermes Agent, HermesAgent, AI Agent, autonomous agent, Nous Research, open source AI, AI assistant, persistent memory, agent skills, Telegram bot AI, Discord bot AI, install Hermes Agent, Hermes Agent tutorial, Hermes Agent features, Hermes Agent documentation" />
+    <meta name="author" content="Hermes Agent Community" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL.href} />
+
+    <!-- Alternate Language -->
+    <link rel="alternate" hreflang="en" href={new URL(getLocalizedPath(Astro.url.pathname.replace(`/${lang}`, '').replace(/^\/$/, '/') || '/', 'en'), Astro.site).href} />
+    <link rel="alternate" hreflang="zh" href={new URL(getLocalizedPath(Astro.url.pathname.replace(`/${lang}`, '').replace(/^\/$/, '/') || '/', 'zh'), Astro.site).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site).href} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:title" content={`${title} | Hermes Agent`} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={ogImage.href} />
+    <meta property="og:site_name" content="HermesAgent.Best" />
+    <meta property="og:locale" content={lang === 'zh' ? 'zh_CN' : 'en_US'} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={`${title} | Hermes Agent`} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImage.href} />
+
+    <!-- Favicon & Assets -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    <title>{title} | HermesAgent.Best</title>
   </head>
   <body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col">
     <!-- Navigation -->
