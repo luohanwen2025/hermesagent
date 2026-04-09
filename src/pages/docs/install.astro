@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { useTranslations, getLocalizedPath } from '../../i18n/ui';
 
-const lang = 'zh';
+const lang = 'en';
 const t = useTranslations(lang);
 ---
 
@@ -11,9 +11,9 @@ const t = useTranslations(lang);
     <!-- Header -->
     <div class="mb-12">
       <nav class="text-sm text-gray-500 mb-4">
-        <a href="/" class="hover:text-gray-300">首页</a>
+        <a href="/" class="hover:text-gray-300">Home</a>
         <span class="mx-2">/</span>
-        <a href="/docs/install" class="text-gray-300">安装指南</a>
+        <a href="/docs/install" class="text-gray-300">Installation Guide</a>
       </nav>
       <h1 class="text-4xl font-bold text-white mb-4">{t('docs.install.title')}</h1>
       <p class="text-lg text-gray-400">{t('docs.install.subtitle')}</p>
@@ -22,64 +22,64 @@ const t = useTranslations(lang);
     <div class="doc-content">
       <!-- Quick Install -->
       <h2 id="quick-install">{t('docs.install.quick')}</h2>
-      <p>推荐使用官方一键安装脚本。支持 <strong>Linux</strong>、<strong>macOS</strong> 和 <strong>WSL2</strong>（Windows Subsystem for Linux 2）。</p>
+      <p>The recommended way is to use the official one-line installer. Supports <strong>Linux</strong>, <strong>macOS</strong>, and <strong>WSL2</strong> (Windows Subsystem for Linux 2).</p>
 
       <div class="code-block my-4">
         <div class="flex items-center justify-between mb-2">
           <span class="text-gray-500 text-xs">bash</span>
-          <button class="text-gray-500 hover:text-gray-300 text-xs" onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.textContent)">复制</button>
+          <button class="text-gray-500 hover:text-gray-300 text-xs" onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.textContent)">Copy</button>
         </div>
         <pre><code>curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</code></pre>
       </div>
 
       <blockquote>
-        <strong>Windows 用户注意：</strong>原生 Windows 不受支持。请先安装 <a href="https://learn.microsoft.com/en-us/windows/wsl/install" target="_blank" rel="noopener">WSL2</a>，然后在 WSL2 终端中运行上述命令。
+        <strong>Windows users:</strong> Native Windows is not supported. Please install <a href="https://learn.microsoft.com/en-us/windows/wsl/install" target="_blank" rel="noopener">WSL2</a> first, then run the command above in a WSL2 terminal.
       </blockquote>
 
-      <p>安装完成后，重新加载 shell：</p>
+      <p>After installation, reload your shell:</p>
 
       <div class="code-block my-4">
-        <pre><code>source ~/.bashrc    # 如果用 zsh：source ~/.zshrc</code></pre>
+        <pre><code>source ~/.bashrc    # if using zsh: source ~/.zshrc</code></pre>
       </div>
 
       <!-- System Requirements -->
-      <h2 id="requirements">系统要求</h2>
+      <h2 id="requirements">System Requirements</h2>
       <table>
         <thead>
           <tr>
-            <th>项目</th>
-            <th>要求</th>
+            <th>Item</th>
+            <th>Requirement</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>操作系统</td>
-            <td>Linux、macOS、WSL2（不支持原生 Windows）</td>
+            <td>OS</td>
+            <td>Linux, macOS, WSL2 (native Windows is not supported)</td>
           </tr>
           <tr>
-            <td>前置依赖</td>
-            <td>Git（安装程序会自动处理 Python、Node.js 等依赖）</td>
+            <td>Prerequisites</td>
+            <td>Git (the installer will handle Python, Node.js, and other dependencies automatically)</td>
           </tr>
           <tr>
-            <td>网络</td>
-            <td>需要访问 GitHub 和模型 API 端点</td>
+            <td>Network</td>
+            <td>Access to GitHub and model API endpoints required</td>
           </tr>
           <tr>
-            <td>推荐硬件</td>
-            <td>$5/月 VPS 即可运行，也支持 GPU 集群和 Serverless</td>
+            <td>Recommended HW</td>
+            <td>A $5/month VPS is sufficient; GPU clusters and Serverless are also supported</td>
           </tr>
         </tbody>
       </table>
 
       <!-- Verify Installation -->
       <h2 id="verify">{t('docs.install.verify')}</h2>
-      <p>安装完成后，运行以下命令验证：</p>
+      <p>After installation, verify with:</p>
 
       <div class="code-block my-4">
         <pre><code>hermes --version</code></pre>
       </div>
 
-      <p>如果看到版本号输出，说明安装成功。你也可以运行诊断工具：</p>
+      <p>If you see a version number, the installation was successful. You can also run the diagnostic tool:</p>
 
       <div class="code-block my-4">
         <pre><code>hermes doctor</code></pre>
@@ -87,65 +87,65 @@ const t = useTranslations(lang);
 
       <!-- Configuration -->
       <h2 id="configure">{t('docs.install.configure')}</h2>
-      <p>Hermes Agent 需要至少配置一个 LLM 提供商。运行设置向导：</p>
+      <p>Hermes Agent requires at least one LLM provider. Run the setup wizard:</p>
 
       <div class="code-block my-4">
         <pre><code>hermes setup</code></pre>
       </div>
 
-      <p>设置向导会引导你完成：</p>
+      <p>The setup wizard guides you through:</p>
       <ol>
-        <li><strong>选择模型提供商</strong> — 支持 OpenRouter（200+ 模型）、OpenAI、Anthropic、Nous Portal、Google Gemini 等</li>
-        <li><strong>输入 API Key</strong> — 至少需要一个提供商的密钥</li>
-        <li><strong>配置消息平台</strong>（可选） — Telegram、Discord、Slack 等</li>
-        <li><strong>启用工具</strong> — 选择需要启用的工具集</li>
+        <li><strong>Choose a model provider</strong> — supports OpenRouter (200+ models), OpenAI, Anthropic, Nous Portal, Google Gemini, and more</li>
+        <li><strong>Enter API Key</strong> — at least one provider key is required</li>
+        <li><strong>Configure messaging platforms</strong> (optional) — Telegram, Discord, Slack, etc.</li>
+        <li><strong>Enable tools</strong> — select which tool sets to enable</li>
       </ol>
 
-      <p>也可以单独配置各部分：</p>
+      <p>You can also configure individually:</p>
 
       <div class="code-block my-4">
-        <pre><code>hermes model        # 选择模型
-hermes tools        # 配置工具
-hermes config set   # 设置单个配置项</code></pre>
+        <pre><code>hermes model        # choose a model
+hermes tools        # configure tools
+hermes config set   # set a single config item</code></pre>
       </div>
 
       <!-- Quick Start Commands -->
-      <h2 id="commands">常用命令</h2>
+      <h2 id="commands">Common Commands</h2>
       <table>
         <thead>
           <tr>
-            <th>命令</th>
-            <th>说明</th>
+            <th>Command</th>
+            <th>Description</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><code>hermes</code></td>
-            <td>启动交互式 CLI 对话</td>
+            <td>Start an interactive CLI chat</td>
           </tr>
           <tr>
             <td><code>hermes setup</code></td>
-            <td>运行完整设置向导</td>
+            <td>Run the full setup wizard</td>
           </tr>
           <tr>
             <td><code>hermes model</code></td>
-            <td>切换模型提供商和模型</td>
+            <td>Switch model provider and model</td>
           </tr>
           <tr>
             <td><code>hermes tools</code></td>
-            <td>配置启用的工具</td>
+            <td>Configure enabled tools</td>
           </tr>
           <tr>
             <td><code>hermes gateway</code></td>
-            <td>启动消息网关（Telegram 等）</td>
+            <td>Start the messaging gateway (Telegram, etc.)</td>
           </tr>
           <tr>
             <td><code>hermes update</code></td>
-            <td>更新到最新版本</td>
+            <td>Update to the latest version</td>
           </tr>
           <tr>
             <td><code>hermes doctor</code></td>
-            <td>诊断问题</td>
+            <td>Diagnose issues</td>
           </tr>
         </tbody>
       </table>
@@ -153,46 +153,46 @@ hermes config set   # 设置单个配置项</code></pre>
       <!-- Troubleshooting -->
       <h2 id="troubleshoot">{t('docs.install.troubleshoot')}</h2>
 
-      <h3>问题：curl 命令执行失败</h3>
-      <p>可能原因和解决方案：</p>
+      <h3>Issue: curl command fails</h3>
+      <p>Possible causes and solutions:</p>
       <ul>
-        <li><strong>网络问题</strong>：确保可以访问 GitHub。中国大陆用户可能需要设置代理：<code>export https_proxy=http://your-proxy:port</code></li>
-        <li><strong>curl 未安装</strong>：运行 <code>sudo apt install curl</code>（Ubuntu/Debian）或 <code>brew install curl</code>（macOS）</li>
+        <li><strong>Network issues</strong>: Make sure you can access GitHub. Users behind a firewall may need to set a proxy: <code>export https_proxy=http://your-proxy:port</code></li>
+        <li><strong>curl not installed</strong>: Run <code>sudo apt install curl</code> (Ubuntu/Debian) or <code>brew install curl</code> (macOS)</li>
       </ul>
 
-      <h3>问题：hermes 命令未找到</h3>
+      <h3>Issue: hermes command not found</h3>
       <ul>
-        <li>确保已运行 <code>source ~/.bashrc</code> 或 <code>source ~/.zshrc</code></li>
-        <li>检查 <code>~/.local/bin</code> 是否在 PATH 中</li>
-        <li>尝试重新打开终端</li>
+        <li>Make sure you have run <code>source ~/.bashrc</code> or <code>source ~/.zshrc</code></li>
+        <li>Check that <code>~/.local/bin</code> is in your PATH</li>
+        <li>Try reopening your terminal</li>
       </ul>
 
-      <h3>问题：Python 相关错误</h3>
+      <h3>Issue: Python-related errors</h3>
       <ul>
-        <li>Hermes 需要 Python 3.10+。安装脚本会自动处理，但如果手动安装，请确保 Python 版本正确</li>
-        <li>尝试运行 <code>hermes doctor</code> 自动诊断</li>
+        <li>Hermes requires Python 3.10+. The install script handles this automatically, but if installing manually, make sure the Python version is correct</li>
+        <li>Try running <code>hermes doctor</code> for automatic diagnostics</li>
       </ul>
 
-      <h3>问题：WSL2 安装问题</h3>
+      <h3>Issue: WSL2 installation problems</h3>
       <ul>
-        <li>确保 WSL2 版本足够新：<code>wsl --update</code></li>
-        <li>推荐使用 Ubuntu 22.04+ 发行版</li>
-        <li>在 WSL2 中运行 <code>sudo apt update && sudo apt install -y curl git</code> 后再执行安装脚本</li>
+        <li>Make sure your WSL2 version is up to date: <code>wsl --update</code></li>
+        <li>Ubuntu 22.04+ distribution is recommended</li>
+        <li>Run <code>sudo apt update && sudo apt install -y curl git</code> in WSL2 before running the install script</li>
       </ul>
 
-      <h3>问题：模型 API 连接失败</h3>
+      <h3>Issue: Model API connection fails</h3>
       <ul>
-        <li>确认 API Key 是否正确：<code>hermes config get provider.api_key</code></li>
-        <li>检查网络是否能访问对应的 API 端点</li>
-        <li>尝试使用 OpenRouter 作为统一入口（支持 200+ 模型）</li>
+        <li>Verify your API Key is correct: <code>hermes config get provider.api_key</code></li>
+        <li>Check that your network can reach the corresponding API endpoint</li>
+        <li>Try using OpenRouter as a unified gateway (supports 200+ models)</li>
       </ul>
 
-      <h3>获取更多帮助</h3>
+      <h3>Getting More Help</h3>
       <ul>
-        <li><a href="https://github.com/nousresearch/hermes-agent/issues" target="_blank" rel="noopener">GitHub Issues</a> — 搜索或提交问题</li>
-        <li><a href="https://github.com/nousresearch/hermes-agent/discussions" target="_blank" rel="noopener">GitHub Discussions</a> — 社区讨论</li>
-        <li><a href="https://discord.gg/nousresearch" target="_blank" rel="noopener">Discord</a> — 实时聊天</li>
-        <li><a href="https://hermes-agent.nousresearch.com/docs/" target="_blank" rel="noopener">官方文档</a> — 完整文档参考</li>
+        <li><a href="https://github.com/nousresearch/hermes-agent/issues" target="_blank" rel="noopener">GitHub Issues</a> — search or submit issues</li>
+        <li><a href="https://github.com/nousresearch/hermes-agent/discussions" target="_blank" rel="noopener">GitHub Discussions</a> — community discussions</li>
+        <li><a href="https://discord.gg/nousresearch" target="_blank" rel="noopener">Discord</a> — live chat</li>
+        <li><a href="https://hermes-agent.nousresearch.com/docs/" target="_blank" rel="noopener">Official Docs</a> — complete documentation reference</li>
       </ul>
     </div>
   </div>

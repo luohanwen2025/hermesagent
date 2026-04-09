@@ -5,7 +5,7 @@ export default defineConfig({
   site: 'https://hermesagent.best',
   integrations: [tailwind()],
   i18n: {
-    defaultLocale: 'zh',
+    defaultLocale: 'en',
     locales: ['zh', 'en'],
     routing: {
       prefixDefaultLocale: false,
