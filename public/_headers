@@ -1,0 +1,21 @@
+# Cloudflare Pages configuration
+# Build command: npm run build
+# Build output directory: dist
+# Node.js version: 18
+
+# Headers for performance and security
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# Cache static assets
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.js
+  Cache-Control: public, max-age=31536000, immutable

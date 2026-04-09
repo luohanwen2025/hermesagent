@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply antialiased;
+  }
+
+  ::selection {
+    @apply bg-brand-500/30 text-white;
+  }
+
+  code {
+    @apply font-mono text-sm;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-400 via-brand-300 to-amber-200;
+  }
+
+  .card {
+    @apply bg-gray-900/50 border border-gray-800/50 rounded-xl p-6 hover:border-gray-700/50 transition-all duration-300;
+  }
+
+  .card:hover {
+    @apply bg-gray-900/80;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-gray-900 font-semibold px-6 py-3 rounded-lg transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white px-6 py-3 rounded-lg transition-colors duration-200;
+  }
+
+  .code-block {
+    @apply bg-gray-900 border border-gray-800 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-white;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-gray-400 mt-4 max-w-2xl;
+  }
+
+  .doc-content h1 {
+    @apply text-3xl font-bold text-white mb-4;
+  }
+
+  .doc-content h2 {
+    @apply text-2xl font-bold text-white mt-10 mb-4 pb-2 border-b border-gray-800;
+  }
+
+  .doc-content h3 {
+    @apply text-xl font-semibold text-white mt-8 mb-3;
+  }
+
+  .doc-content p {
+    @apply text-gray-300 leading-relaxed mb-4;
+  }
+
+  .doc-content ul {
+    @apply list-disc list-inside space-y-2 text-gray-300 mb-4;
+  }
+
+  .doc-content ol {
+    @apply list-decimal list-inside space-y-2 text-gray-300 mb-4;
+  }
+
+  .doc-content code {
+    @apply bg-gray-800 text-brand-300 px-1.5 py-0.5 rounded text-sm;
+  }
+
+  .doc-content pre {
+    @apply bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto mb-6;
+  }
+
+  .doc-content pre code {
+    @apply bg-transparent p-0;
+  }
+
+  .doc-content blockquote {
+    @apply border-l-4 border-brand-500 pl-4 my-4 text-gray-400 italic;
+  }
+
+  .doc-content a {
+    @apply text-brand-400 hover:text-brand-300 underline transition-colors;
+  }
+
+  .doc-content table {
+    @apply w-full border-collapse mb-6;
+  }
+
+  .doc-content th {
+    @apply text-left text-gray-300 font-semibold py-2 px-4 border-b border-gray-800;
+  }
+
+  .doc-content td {
+    @apply py-2 px-4 border-b border-gray-800/50 text-gray-400;
+  }
+}

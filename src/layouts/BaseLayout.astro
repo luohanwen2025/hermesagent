@@ -1,0 +1,104 @@
+---
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/ui';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: 'zh' | 'en';
+}
+
+const { title, description = 'Hermes Agent — 一个与你共同成长的自主 AI Agent', lang: propLang } = Astro.props;
+const lang = propLang || getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const altLang = lang === 'zh' ? 'en' : 'zh';
+const altPath = getLocalizedPath(Astro.url.pathname.replace(`/${lang}`, '').replace(/^\/$/, '/') || '/', altLang);
+
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang={lang === 'zh' ? 'zh-CN' : 'en'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="Hermes Agent, AI Agent, autonomous agent, Nous Research, open source AI" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <title>{title} | HermesAgent.Best</title>
+  </head>
+  <body class="bg-gray-950 text-gray-100 min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="border-b border-gray-800/50 backdrop-blur-md bg-gray-950/80 sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center gap-8">
+            <a href={getLocalizedPath('/', lang)} class="flex items-center gap-2 text-xl font-bold text-white hover:text-brand-400 transition-colors">
+              <svg class="w-8 h-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="8" fill="#F59E0B"/>
+                <path d="M8 22L16 10L24 22" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="16" cy="18" r="3" fill="white"/>
+              </svg>
+              HermesAgent
+            </a>
+            <div class="hidden md:flex items-center gap-6">
+              <a href={getLocalizedPath('/docs/install', lang)} class="text-gray-400 hover:text-white transition-colors text-sm font-medium">{t('nav.install')}</a>
+              <a href={getLocalizedPath('/docs/features', lang)} class="text-gray-400 hover:text-white transition-colors text-sm font-medium">{t('nav.features')}</a>
+              <a href="https://github.com/nousresearch/hermes-agent" target="_blank" rel="noopener" class="text-gray-400 hover:text-white transition-colors text-sm font-medium">{t('nav.github')}</a>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <a href={altPath} class="text-sm text-gray-400 hover:text-white border border-gray-700 rounded-md px-3 py-1.5 transition-colors hover:border-gray-500">
+              {t('lang.switch')}
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800/50 mt-20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <div class="flex items-center gap-2 text-lg font-bold text-white mb-3">
+              <svg class="w-6 h-6" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="8" fill="#F59E0B"/>
+                <path d="M8 22L16 10L24 22" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="16" cy="18" r="3" fill="white"/>
+              </svg>
+              HermesAgent.Best
+            </div>
+            <p class="text-gray-500 text-sm leading-relaxed">{t('footer.desc')}</p>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold mb-3">{t('footer.official')}</h4>
+            <ul class="space-y-2 text-sm">
+              <li><a href="https://hermes-agent.nousresearch.com/" target="_blank" rel="noopener" class="text-gray-400 hover:text-brand-400 transition-colors">hermes-agent.nousresearch.com</a></li>
+              <li><a href="https://hermes-agent.nousresearch.com/docs/" target="_blank" rel="noopener" class="text-gray-400 hover:text-brand-400 transition-colors">{t('footer.docs')}</a></li>
+              <li><a href="https://github.com/nousresearch/hermes-agent" target="_blank" rel="noopener" class="text-gray-400 hover:text-brand-400 transition-colors">GitHub</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold mb-3">{t('footer.community')}</h4>
+            <ul class="space-y-2 text-sm">
+              <li><a href="https://discord.gg/nousresearch" target="_blank" rel="noopener" class="text-gray-400 hover:text-brand-400 transition-colors">Discord</a></li>
+              <li><a href="https://github.com/nousresearch/hermes-agent/issues" target="_blank" rel="noopener" class="text-gray-400 hover:text-brand-400 transition-colors">Issues</a></li>
+              <li><a href="https://github.com/nousresearch/hermes-agent/discussions" target="_blank" rel="noopener" class="text-gray-400 hover:text-brand-400 transition-colors">Discussions</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-gray-800/50 mt-8 pt-8 text-center text-gray-600 text-sm">
+          <p>{t('footer.built')}</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

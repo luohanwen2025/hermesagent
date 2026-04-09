@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../i18n/ui';
+
+const lang = 'zh';
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={t('docs.features.title')} lang={lang}>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="mb-12">
+      <nav class="text-sm text-gray-500 mb-4">
+        <a href="/" class="hover:text-gray-300">首页</a>
+        <span class="mx-2">/</span>
+        <a href="/docs/features" class="text-gray-300">功能介绍</a>
+      </nav>
+      <h1 class="text-4xl font-bold text-white mb-4">{t('docs.features.title')}</h1>
+      <p class="text-lg text-gray-400">{t('docs.features.subtitle')}</p>
+    </div>
+
+    <!-- Feature Navigation -->
+    <div class="flex flex-wrap gap-2 mb-12">
+      <a href="#memory" class="text-sm bg-gray-800/50 hover:bg-gray-800 text-gray-300 hover:text-white px-3 py-1.5 rounded-lg transition-colors">持久记忆</a>
+      <a href="#subagents" class="text-sm bg-gray-800/50 hover:bg-gray-800 text-gray-300 hover:text-white px-3 py-1.5 rounded-lg transition-colors">子代理并行</a>
+      <a href="#platforms" class="text-sm bg-gray-800/50 hover:bg-gray-800 text-gray-300 hover:text-white px-3 py-1.5 rounded-lg transition-colors">多平台接入</a>
+      <a href="#scheduling" class="text-sm bg-gray-800/50 hover:bg-gray-800 text-gray-300 hover:text-white px-3 py-1.5 rounded-lg transition-colors">定时自动化</a>
+      <a href="#skills" class="text-sm bg-gray-800/50 hover:bg-gray-800 text-gray-300 hover:text-white px-3 py-1.5 rounded-lg transition-colors">技能系统</a>
+    </div>
+
+    <div class="doc-content">
+      <!-- Memory -->
+      <h2 id="memory">{t('docs.features.memory')}</h2>
+      <p>Hermes Agent 拥有行业领先的持久记忆系统。与传统的"无状态"聊天机器人不同，Hermes 会记住所有学到的内容，并且随着使用时间增长，它对你的了解会越来越深。</p>
+
+      <h3>核心特性</h3>
+      <ul>
+        <li><strong>Agent 策划的记忆</strong> — Agent 会自主决定哪些信息值得记住，并定期自我提醒将重要知识持久化</li>
+        <li><strong>自动技能生成</strong> — 完成复杂任务后，Agent 自动将解决过程提炼为可复用的技能</li>
+        <li><strong>跨会话搜索</strong> — 使用 FTS5 全文搜索引擎，可搜索所有历史对话，并通过 LLM 进行摘要</li>
+        <li><strong>用户建模</strong> — 基于 Honcho 方言式用户建模技术，构建不断深化的用户画像</li>
+        <li><strong>agentskills.io 标准</strong> — 兼容开放技能标准，技能可跨 Agent 共享</li>
+      </ul>
+
+      <h3>工作原理</h3>
+      <p>当你与 Hermes Agent 对话时，它会在三个层面存储信息：</p>
+      <ol>
+        <li><strong>工作记忆</strong> — 当前对话中的上下文</li>
+        <li><strong>持久记忆</strong> — 跨对话保留的重要事实、偏好和知识</li>
+        <li><strong>技能库</strong> — 从经验中提炼的标准化操作流程</li>
+      </ol>
+      <p>Agent 会在对话过程中自主判断哪些信息值得持久化，并在适当的时候提醒自己进行记忆更新。</p>
+
+      <!-- Subagents -->
+      <h2 id="subagents">{t('docs.features.subagents')}</h2>
+      <p>Hermes Agent 可以生成隔离的子代理来并行处理任务。每个子代理拥有独立的对话上下文、终端环境和工具集，实现真正的并行工作。</p>
+
+      <h3>核心特性</h3>
+      <ul>
+        <li><strong>隔离执行</strong> — 每个子代理有独立的对话历史和终端，互不干扰</li>
+        <li><strong>并行处理</strong> — 同时处理多个任务，大幅提升效率</li>
+        <li><strong>Python RPC</strong> — 编写 Python 脚本通过 RPC 调用工具，将多步流水线压缩为零上下文成本的单次交互</li>
+        <li><strong>灵活调度</strong> — 主 Agent 协调多个子代理的工作流，汇总结果</li>
+      </ul>
+
+      <h3>使用场景</h3>
+      <ul>
+        <li>同时对多个代码仓库进行代码审查</li>
+        <li>并行研究多个主题并汇总报告</li>
+        <li>批量处理数据清洗任务</li>
+        <li>将复杂的多步骤工作流拆分为并行子任务</li>
+      </ul>
+
+      <!-- Platforms -->
+      <h2 id="platforms">{t('docs.features.platforms')}</h2>
+      <p>Hermes Agent 通过统一的网关进程连接多个消息平台。你可以在 Telegram 上开始一个对话，然后在 Discord 上继续，对话上下文保持连续。</p>
+
+      <h3>支持的平台</h3>
+      <table>
+        <thead>
+          <tr><th>平台</th><th>特性</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Telegram</td><td>完整支持，包括语音消息转录、文件传输</td></tr>
+          <tr><td>Discord</td><td>完整支持，支持频道和私信</td></tr>
+          <tr><td>Slack</td><td>完整支持，适合团队协作</td></tr>
+          <tr><td>WhatsApp</td><td>消息收发支持</td></tr>
+          <tr><td>Signal</td><td>消息收发支持</td></tr>
+          <tr><td>Email</td><td>邮件收发支持</td></tr>
+          <tr><td>CLI</td><td>全功能 TUI，支持多行编辑、历史记录、流式输出</td></tr>
+        </tbody>
+      </table>
+
+      <h3>快速设置</h3>
+      <div class="code-block my-4">
+        <pre><code>hermes gateway setup    # 配置消息平台
+hermes gateway start    # 启动网关</code></pre>
+      </div>
+      <p>启动网关后，在任何平台上向你的 Bot 发送消息即可开始对话。</p>
+
+      <!-- Scheduling -->
+      <h2 id="scheduling">{t('docs.features.scheduling')}</h2>
+      <p>Hermes Agent 内置了 cron 调度器，支持自然语言描述定时任务。你可以让它每天发送新闻摘要、每周生成报告、定时备份数据 —— 全部无人值守运行。</p>
+
+      <h3>核心特性</h3>
+      <ul>
+        <li><strong>自然语言调度</strong> — 用日常语言描述任务计划，无需记忆 cron 语法</li>
+        <li><strong>多平台投递</strong> — 定时任务的结果可以投递到任何已连接的平台</li>
+        <li><strong>持久化</strong> — 调度任务在 Agent 重启后仍然有效</li>
+        <li><strong>灵活配置</strong> — 支持一次性任务和循环任务</li>
+      </ul>
+
+      <h3>使用示例</h3>
+      <div class="code-block my-4">
+        <pre><code># 在对话中直接用自然语言设置定时任务
+"每天早上 9 点给我发送今日新闻摘要"
+"每周一备份 /data 目录"
+"每小时检查一次服务器状态并发送报告"</code></pre>
+      </div>
+
+      <!-- Skills -->
+      <h2 id="skills">{t('docs.features.skills')}</h2>
+      <p>Hermes Agent 拥有完整的技能学习闭环 — 这是它区别于其他 Agent 的核心特征。它不只是使用预定义的技能，更能从经验中创建新技能，并在使用过程中不断改进。</p>
+
+      <h3>技能生态系统</h3>
+      <ul>
+        <li><strong>77 个内置技能</strong> — 涵盖编程、搜索、文档处理、多媒体等</li>
+        <li><strong>45 个可选技能</strong> — 需要额外依赖的高级功能</li>
+        <li><strong>521 个社区技能</strong> — 来自社区的贡献，持续增长中</li>
+        <li><strong>16 个分类</strong> — AI 编程、系统管理、研究分析、多媒体创作等</li>
+      </ul>
+
+      <h3>学习闭环</h3>
+      <ol>
+        <li><strong>任务执行</strong> — Agent 完成一个复杂任务</li>
+        <li><strong>技能提取</strong> — 自动分析解决过程，提炼为可复用的技能</li>
+        <li><strong>技能存储</strong> — 保存到本地技能库</li>
+        <li><strong>自我改进</strong> — 后续使用同一技能时，Agent 会根据反馈优化流程</li>
+        <li><strong>知识持久化</strong> — 通过自我提醒机制，确保经验不会被遗忘</li>
+      </ol>
+
+      <h3>技能浏览</h3>
+      <div class="code-block my-4">
+        <pre><code>/skills              # 浏览所有可用技能
+/&lt;skill-name&gt;        # 直接调用某个技能</code></pre>
+      </div>
+      <p>你还可以访问 <a href="https://hermes-agent.nousresearch.com/docs/skills" target="_blank" rel="noopener">Skills Hub</a> 浏览完整的技能目录。</p>
+    </div>
+  </div>
+</BaseLayout>
